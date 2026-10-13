@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Manage the stock in a business.
@@ -26,7 +27,12 @@ public class StockManager
      */
     public void addProduct(Product item)
     {
-        stockList.add(item);
+        if (findProduct(item.getID()) == null){
+            stockList.add(item);
+        } else {
+            System.out.println("Error: A product with this ID already exists.");
+        }
+        
     }
     
     /**
@@ -37,6 +43,12 @@ public class StockManager
      */
     public void delivery(int id, int amount)
     {
+        //question 4
+        Product aProduct = findProduct(id);
+        if (aProduct == null){
+            return;
+        }
+        aProduct.increaseQuantity(amount);
     }
     
     /**
@@ -46,6 +58,22 @@ public class StockManager
      */
     public Product findProduct(int id)
     {
+        // question 2 
+        for (Product p : stockList){
+            if (p.getID() == id) {
+                return p;
+            } 
+        }
+        return null;
+    }
+    
+    public Product findProductName(String name)
+    {
+        for (Product p : stockList){
+            if (p.getName().equals(name)){
+                return p;
+            }
+        }
         return null;
     }
     
@@ -58,7 +86,12 @@ public class StockManager
      */
     public int numberInStock(int id)
     {
-        return 0;
+        //question 3
+        Product aProduct = findProduct(id);
+        if (aProduct == null){
+            return 0;
+        }
+        return aProduct.getQuantity();
     }
 
     /**
@@ -66,5 +99,22 @@ public class StockManager
      */
     public void printProductDetails()
     {
+        //question 1
+        Iterator <Product> it = stockList.iterator();
+        System.out.println ("Product Details:");
+        while (it.hasNext()){
+            Product p = it.next();
+            System.out.println(p.toString());
+        }
+    }
+    
+    //question 5
+    public void productStockLevel(int limit)
+    {
+        for (Product p : stockList){
+            if (p.getQuantity() < limit) {
+                System.out.println(p.toString());
+            }
+        }
     }
 }

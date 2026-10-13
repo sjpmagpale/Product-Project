@@ -18,9 +18,9 @@ public class StockDemo
     public StockDemo()
     {
         manager = new StockManager();
-        manager.addProduct(new Product(132, "Clock Radio"));
-        manager.addProduct(new Product(37,  "Mobile Phone"));
-        manager.addProduct(new Product(23,  "Microwave Oven"));
+        manager.addProduct(new Product(132, "Clock Radio", 10));
+        manager.addProduct(new Product(37,  "Mobile Phone", 20));
+        manager.addProduct(new Product(23,  "Microwave Oven", 30));
     }
     
     /**
